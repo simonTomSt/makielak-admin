@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "o_nas_s",
+  "info": {
+    "name": "O nas "
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "opis": {
+      "type": "richtext",
+      "required": true
+    },
+    "opisDolny": {
+      "type": "richtext"
+    },
+    "zdjecia": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "zdjeciaDolne": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

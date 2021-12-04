@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "certyfikaty",
+  "info": {
+    "name": "certyfikaty",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nazwa": {
+      "type": "string",
+      "required": true
+    },
+    "typ": {
+      "type": "enumeration",
+      "enum": [
+        "deklaracja",
+        "certyfikat"
+      ],
+      "default": "deklaracja",
+      "required": false
+    },
+    "plik": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    },
+    "miniaturka": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

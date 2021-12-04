@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ofertas",
+  "info": {
+    "name": "oferta",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tytul": {
+      "type": "string",
+      "required": true
+    },
+    "miniaturka": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    },
+    "zdjecie": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "opis": {
+      "type": "richtext"
+    },
+    "kategoria": {
+      "via": "oferty",
+      "model": "kategorie"
+    },
+    "offerId": {
+      "type": "uid",
+      "targetField": "tytul"
+    }
+  }
+}
