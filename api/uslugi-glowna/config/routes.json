@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/uslugi-glownas",
+      "handler": "uslugi-glowna.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/uslugi-glownas/count",
+      "handler": "uslugi-glowna.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/uslugi-glownas/:id",
+      "handler": "uslugi-glowna.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/uslugi-glownas",
+      "handler": "uslugi-glowna.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/uslugi-glownas/:id",
+      "handler": "uslugi-glowna.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/uslugi-glownas/:id",
+      "handler": "uslugi-glowna.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

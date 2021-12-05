@@ -46,6 +46,10 @@
     "offerId": {
       "type": "uid",
       "targetField": "tytul"
+    },
+    "tylkoNaGlownej": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

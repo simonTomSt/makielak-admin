@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "nazwa": {
+    "tytul": {
       "type": "string",
       "required": true
     },
