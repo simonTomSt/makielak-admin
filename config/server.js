@@ -6,5 +6,6 @@ module.exports = ({ env }) => ({
     auth: {
       secret: env('ADMIN_JWT_SECRET', 'c9a2575ea20941042f2229eb518f37e8'),
     },
+    url: 'https://dreamit.toadres.pl/admin',
   },
 });
