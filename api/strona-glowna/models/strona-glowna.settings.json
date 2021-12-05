@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "glowna-strona",
+  "info": {
+    "name": "Glowna Strona",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tytul": {
+      "type": "string",
+      "required": true
+    },
+    "opis": {
+      "type": "richtext"
+    },
+    "onas": {
+      "type": "richtext",
+      "required": true
+    },
+    "oferta": {
+      "collection": "oferta"
+    },
+    "uslugi": {
+      "collection": "uslugi-glowna"
+    }
+  }
+}
