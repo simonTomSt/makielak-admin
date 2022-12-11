@@ -1,0 +1,355 @@
+---
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Makielak API
+  description: This is a makielak API documentation.
+servers:
+- url: https://{URL}:{PORT}
+- url: http://{URL}:{PORT}
+tags:
+- name: Users
+paths:
+  "/users":
+    get:
+      operationId: getAllUsers
+      tags:
+      - Users
+      summary: Gets all users
+      responses:
+        '201':
+          description: Users response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetAllUsersResponse"
+        '400':
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BadRequest"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFound"
+        '500':
+          description: Internal server error response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+    post:
+      operationId: createUser
+      tags:
+      - Users
+      summary: Creates a user
+      requestBody:
+        description: User data
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateUserDto"
+        required: true
+      responses:
+        '201':
+          description: User response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CreateUserResponse"
+        '400':
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BadRequest"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFound"
+        '500':
+          description: Internal server error response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+  "/users/:id":
+    get:
+      operationId: getUserById
+      tags:
+      - Users
+      summary: Gets a user by id
+      responses:
+        '200':
+          description: User response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserResponse"
+        '400':
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BadRequest"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFound"
+        '500':
+          description: Internal server error response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+    patch:
+      operationId: updateUser
+      tags:
+      - Users
+      summary: Updates a user by id
+      requestBody:
+        description: User data
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateUserDto"
+        required: true
+      responses:
+        '200':
+          description: Update user response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DeleteUserResponse"
+        '400':
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BadRequest"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFound"
+        '500':
+          description: Internal server error response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+    delete:
+      operationId: deleteUser
+      tags:
+      - Users
+      summary: Deletes a user by id
+      responses:
+        '200':
+          description: Delete user response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DeleteUserResponse"
+        '400':
+          description: Bad request response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BadRequest"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFound"
+        '500':
+          description: Internal server error response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+components:
+  schemas:
+    UserOutDto:
+      properties:
+        id:
+          minLength: 1
+          type: string
+          format: uuid
+        email:
+          minLength: 1
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          minLength: 1
+          type: string
+          enum:
+          - SUPER_ADMIN
+          - ADMIN
+      type: object
+      required:
+      - id
+      - email
+      - name
+      - role
+    GetUserByIdDto:
+      properties:
+        id:
+          minLength: 1
+          type: string
+          format: uuid
+      type: object
+      required:
+      - id
+    DeleteOneUserDto:
+      properties:
+        id:
+          minLength: 1
+          type: string
+          format: uuid
+      type: object
+      required:
+      - id
+    UpdateUserDto:
+      properties:
+        id:
+          minLength: 1
+          type: string
+          format: uuid
+        email:
+          format: email
+          type: string
+        name:
+          type: string
+        role:
+          enum:
+          - SUPER_ADMIN
+          - ADMIN
+          type: string
+      type: object
+      required:
+      - id
+    CreateUserDto:
+      properties:
+        email:
+          minLength: 1
+          type: string
+          format: email
+        password:
+          maxLength: 64
+          type: string
+          minLength: 1
+        name:
+          type: string
+        role:
+          enum:
+          - SUPER_ADMIN
+          - ADMIN
+          type: string
+      type: object
+      required:
+      - email
+      - password
+    GetAllUsersResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                "$ref": "#/components/schemas/UserOutDto"
+        statusCode:
+          type: number
+          example: 200
+        error:
+          type: string
+    CreateUserResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            user:
+              "$ref": "#/components/schemas/UserOutDto"
+        statusCode:
+          type: number
+          example: 201
+        error:
+          type: string
+    UserResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            user:
+              "$ref": "#/components/schemas/UserOutDto"
+        statusCode:
+          type: number
+          example: 200
+        error:
+          type: string
+    DeleteUserResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            deleted:
+              type: boolean
+        statusCode:
+          type: number
+          example: 200
+        error:
+          type: string
+          example: "Error"
+    Role:
+      type: string
+      enum:
+      - SUPER_ADMIN
+      - ADMIN
+    InternalServerError:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+    BadRequest:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 500
+        error:
+          type: string
+          example: Bad request
+    NotFound:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 404
+        error:
+          type: string
+          example: Not found
+    uuid:
+      type: string
+      pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      minLength: 36
+      maxLength: 36
+      example: 95b11417-f18f-457f-8804-68e361f9164f
