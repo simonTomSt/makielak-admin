@@ -3,10 +3,11 @@ import { notification } from 'antd';
 import { deleteCookie } from 'utils';
 import {
   Configuration,
-  ErrorContext,
   Middleware,
   ResponseContext,
+  StorageApi,
   UsersApi,
+  ContentApi,
 } from './lib';
 
 class AuthTokenMiddleware implements Middleware {
@@ -20,14 +21,20 @@ class AuthTokenMiddleware implements Middleware {
   }
 }
 
+export const baseApiPath = process.env.REACT_APP_API_URL;
+
 const config = new Configuration({
-  basePath: process.env.REACT_APP_API_URL,
+  basePath: baseApiPath,
   credentials: 'include',
   middleware: [new AuthTokenMiddleware()],
 });
 
+// Api
 export const usersApi = new UsersApi(config);
+export const contentApi = new ContentApi(config);
+export const storageApi = new StorageApi(config);
 
+// Query Client Config
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error, query) => {

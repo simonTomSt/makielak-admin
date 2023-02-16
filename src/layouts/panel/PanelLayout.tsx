@@ -51,7 +51,10 @@ export const PanelLayout = () => {
             style={{ padding: 24, minHeight: 360 }}
           >
             <main>
+              <div style={{maxWidth: 1200}}>
               <Outlet />
+              </div>
+
             </main>
           </div>
         </Content>
